@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>📊 Vendor Management Dashboard</h1>
+    
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">{{ total_vendors }}</div>
+            <div class="stat-label">Total Vendors</div>
+        </div>
+        <div class="stat-card success">
+            <div class="stat-number">{{ approved_vendors }}</div>
+            <div class="stat-label">Approved Vendors</div>
+        </div>
+        <div class="stat-card warning">
+            <div class="stat-number">{{ pending_vendors }}</div>
+            <div class="stat-label">Pending Approval</div>
+        </div>
+        <div class="stat-card info">
+            <div class="stat-number">{{ avg_hygiene }}%</div>
+            <div class="stat-label">Avg Hygiene Score</div>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <h2>Quick Actions</h2>
+        <div class="links-grid">
+            <a href="/register" class="link-card">
+                <div class="link-icon">📝</div>
+                <div class="link-text">Register Vendor</div>
+            </a>
+            <a href="/vendor/login" class="link-card">
+                <div class="link-icon">🔐</div>
+                <div class="link-text">Vendor Login</div>
+            </a>
+            <a href="/vendors" class="link-card">
+                <div class="link-icon">📋</div>
+                <div class="link-text">View Vendors</div>
+            </a>
+            <a href="/admin/login" class="link-card">
+                <div class="link-icon">⚙️</div>
+                <div class="link-text">Admin Panel</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="info-section">
+        <h2>About This System</h2>
+        <p>This vendor registration system helps manage street food vendors in Greater Noida with focus on hygiene and food safety compliance.</p>
+        <ul>
+            <li>✅ Digital vendor registration</li>
+            <li>✅ Hygiene score tracking</li>
+            <li>✅ Admin approval workflow</li>
+            <li>✅ Public vendor directory</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

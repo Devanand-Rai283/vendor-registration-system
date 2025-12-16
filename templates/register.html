@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Vendor Registration{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>📝 Vendor Registration</h1>
+    <form method="POST" enctype="multipart/form-data" class="vendor-form">
+        <fieldset>
+            <legend>Personal Information</legend>
+            
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="age">Age *</label>
+                    <input type="number" id="age" name="age" min="18" max="100" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gender *</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="education">Education Level</label>
+                <select id="education" name="education">
+                    <option value="">Select</option>
+                    <option value="No Formal Education">No Formal Education</option>
+                    <option value="Primary">Primary</option>
+                    <option value="Secondary">Secondary</option>
+                    <option value="Higher Secondary">Higher Secondary</option>
+                    <option value="Graduate">Graduate</option>
+                </select>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="contact">Contact Number *</label>
+                    <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Business Information</legend>
+            
+            <div class="form-group">
+                <label for="stall_location">Stall Location *</label>
+                <input type="text" id="stall_location" name="stall_location" placeholder="e.g., Alpha Market, Near Gate 2" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="food_type">Food Type *</label>
+                <input type="text" id="food_type" name="food_type" placeholder="e.g., Chaat, Momos, Tea" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="photo">Stall Photo</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Hygiene Practices</legend>
+            
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="has_gloves"> I use gloves while handling food</label>
+                <label><input type="checkbox" name="has_apron"> I wear protective apron</label>
+                <label><input type="checkbox" name="washes_hands"> I wash hands regularly</label>
+                <label><input type="checkbox" name="uses_trash_bin"> I use proper trash bins</label>
+                <label><input type="checkbox" name="has_refrigerator"> I have refrigerator for storage</label>
+                <label><input type="checkbox" name="cleans_utensils"> I clean utensils after every use</label>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Account Security</legend>
+            
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password" minlength="6" required>
+            </div>
+        </fieldset>
+        
+        <button type="submit" class="btn-primary">Register Now</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Vendor Portal{% endblock %}
+
+{% block content %}
+<div class="vendor-portal">
+    <h1>👤 Welcome, {{ vendor.name }}</h1>
+    
+    <div class="portal-header">
+        <div class="vendor-card">
+            <h2>Your Information</h2>
+            <div class="vendor-details">
+                <p><strong>Vendor ID:</strong> {{ vendor.vendor_id }}</p>
+                <p><strong>Registration Date:</strong> {{ vendor.registration_date.strftime('%d-%m-%Y') }}</p>
+                <p><strong>Status:</strong> 
+                    {% if vendor.is_approved %}
+                        <span class="badge badge-success">✓ Approved</span>
+                    {% else %}
+                        <span class="badge badge-warning">⏳ Pending Approval</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        
+        <div class="vendor-card">
+            <h2>Hygiene Score</h2>
+            <div class="score-display">
+                <div class="large-score">{{ vendor.hygiene_score }}%</div>
+                <div class="score-meter">
+                    <div class="meter-fill" style="width: {{ vendor.hygiene_score }}%"></div>
+                </div>
+                <p>Keep improving your hygiene practices!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="portal-details">
+        <h2>📋 Business Details</h2>
+        <div class="details-grid">
+            <div class="detail-item">
+                <label>Name:</label>
+                <p>{{ vendor.name }}</p>
+            </div>
+            <div class="detail-item">
+                <label>Age:</label>
+                <p>{{ vendor.age }}</p>
+            </div>
+            <div class="detail-item">
+                <label>Gender:</label>
+                <p>{{ vendor.gender }}</p>
+            </div>
+            <div class="detail-item">
+                <label>Contact:</label>
+                <p>{{ vendor.contact }}</p>
+            </div>
+            <div class="detail-item">
+                <label>Stall Location:</label>
+                <p>{{ vendor.stall_location }}</p>
+            </div>
+            <div class="detail-item">
+                <label>Food Type:</label>
+                <p>{{ vendor.food_type }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hygiene-practices">
+        <h2>🧼 Your Hygiene Practices</h2>
+        <div class="practices-grid">
+            <div class="practice {% if vendor.has_gloves %}active{% endif %}">
+                <div class="practice-icon">🧤</div>
+                <div class="practice-name">Uses Gloves</div>
+            </div>
+            <div class="practice {% if vendor.has_apron %}active{% endif %}">
+                <div class="practice-icon">👕</div>
+                <div class="practice-name">Wears Apron</div>
+            </div>
+            <div class="practice {% if vendor.washes_hands %}active{% endif %}">
+                <div class="practice-icon">🚰</div>
+                <div class="practice-name">Washes Hands</div>
+            </div>
+            <div class="practice {% if vendor.uses_trash_bin %}active{% endif %}">
+                <div class="practice-icon">🗑️</div>
+                <div class="practice-name">Proper Waste</div>
+            </div>
+            <div class="practice {% if vendor.has_refrigerator %}active{% endif %}">
+                <div class="practice-icon">❄️</div>
+                <div class="practice-name">Has Fridge</div>
+            </div>
+            <div class="practice {% if vendor.cleans_utensils %}active{% endif %}">
+                <div class="practice-icon">🍴</div>
+                <div class="practice-name">Cleans Utensils</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="portal-actions">
+        <a href="/logout" class="btn-danger">Logout</a>
+    </div>
+</div>
+{% endblock %}

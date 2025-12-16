@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Vendor Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-box">
+        <h1>🔐 Vendor Login</h1>
+        
+        <form method="POST" class="login-form">
+            <div class="form-group">
+                <label for="vendor_id">Vendor ID</label>
+                <input type="text" id="vendor_id" name="vendor_id" placeholder="e.g., VEN20250001" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+        
+        <p class="info-text">
+            Don't have an account? <a href="/register">Register here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

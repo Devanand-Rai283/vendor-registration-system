@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Vendor Directory{% endblock %}
+
+{% block content %}
+<div class="vendor-directory">
+    <h1>📋 Approved Vendors Directory</h1>
+    
+    <div class="search-bar">
+        <form method="GET" class="search-form">
+            <input type="text" name="location" placeholder="Search by location..." value="{{ request.args.get('location', '') }}">
+            <button type="submit" class="btn-primary">Search</button>
+        </form>
+    </div>
+
+    <div class="vendors-grid">
+        {% if vendors %}
+            {% for vendor in vendors %}
+            <div class="vendor-card-grid">
+                {% if vendor.photo %}
+                    <img src="{{ url_for('static', filename='uploads/' + vendor.photo) }}" alt="{{ vendor.name }}">
+                {% else %}
+                    <div class="no-photo">📸</div>
+                {% endif %}
+                
+                <div class="vendor-info">
+                    <h3>{{ vendor.name }}</h3>
+                    <p><strong>Vendor ID:</strong> {{ vendor.vendor_id }}</p>
+                    <p><strong>Food Type:</strong> {{ vendor.food_type }}</p>
+                    <p><strong>Location:</strong> {{ vendor.stall_location }}</p>
+                    <p><strong>Contact:</strong> {{ vendor.contact }}</p>
+                    
+                    <div class="hygiene-badge">
+                        <div class="score-meter">
+                            <div class="meter-fill" style="width: {{ vendor.hygiene_score }}%"></div>
+                        </div>
+                        <span>Hygiene Score: {{ vendor.hygiene_score }}%</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-results">No vendors found in this location.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

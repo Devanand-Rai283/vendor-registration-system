@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard">
+    <h1>⚙️ Admin Dashboard</h1>
+    
+    <div class="admin-controls">
+        <a href="/admin/login" class="btn-secondary">Back to Login</a>
+        <a href="/logout" class="btn-danger">Logout</a>
+    </div>
+
+    <h2>📋 Vendor Applications</h2>
+    <div class="table-container">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Vendor ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Contact</th>
+                    <th>Food Type</th>
+                    <th>Hygiene Score</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vendor in vendors %}
+                <tr class="{% if vendor.is_approved %}approved{% else %}pending{% endif %}">
+                    <td><strong>{{ vendor.vendor_id }}</strong></td>
+                    <td>{{ vendor.name }}</td>
+                    <td>{{ vendor.stall_location }}</td>
+                    <td>{{ vendor.contact }}</td>
+                    <td>{{ vendor.food_type }}</td>
+                    <td>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: {{ vendor.hygiene_score }}%"></div>
+                            <span class="score-text">{{ vendor.hygiene_score }}%</span>
+                        </div>
+                    </td>
+                    <td>
+                        {% if vendor.is_approved %}
+                            <span class="badge badge-success">✓ Approved</span>
+                        {% else %}
+                            <span class="badge badge-warning">⏳ Pending</span>
+                        {% endif %}
+                    </td>
+                    <td class="actions">
+                        <button class="btn-small btn-info" onclick="viewDetails({{ vendor.id }})">View</button>
+                        {% if not vendor.is_approved %}
+                            <a href="/admin/approve/{{ vendor.id }}" class="btn-small btn-success">Approve</a>
+                        {% endif %}
+                        <a href="/admin/delete/{{ vendor.id }}" class="btn-small btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Vendor Details Modal -->
+    <div id="detailsModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+function viewDetails(vendorId) {
+    // This can be expanded to show detailed vendor information
+    alert('View functionality - can be expanded to show full vendor profile');
+}
+
+function closeModal() {
+    document.getElementById('detailsModal').style.display = 'none';
+}
+</script>
+{% endblock %}
